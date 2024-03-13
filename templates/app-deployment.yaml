@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-deployment
+spec:
+  replicas: {{ .Values.app.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.app.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.app.name }}
+    spec:
+      containers:
+      - name: {{ .Values.app.name }}
+        image: irgashevsardor/tasks-app
+        ports:
+        - containerPort: {{ .Values.app.containerPort }}
+        env:
+          - name: MYSQL_USER
+            value: "user"
+          - name: MYSQL_HOST
+            value: "mysql-service"
+          - name: MYSQL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysql-env-data
+                key: MYSQL_PASSWORD
+          - name: MYSQL_DB
+            value: "list"
