@@ -26,16 +26,10 @@ spec:
             subPath: {{ .Values.db.subPath }}
         env:
           - name: MYSQL_ROOT_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: mysql-env-data
-                key: MYSQL_ROOT_PASSWORD
-          - name: MYSQL_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: mysql-env-data
-                key: MYSQL_PASSWORD
+            value: "4697"
           - name: MYSQL_USER
             value: "user"
+          - name: MYSQL_PASSWORD
+            value: "4697"
           - name: MYSQL_DATABASE
             value: "list"

@@ -19,13 +19,28 @@ spec:
         - containerPort: {{ .Values.app.containerPort }}
         env:
           - name: MYSQL_USER
-            value: "user"
-          - name: MYSQL_HOST
-            value: "mysql-service"
-          - name: MYSQL_PASSWORD
             valueFrom:
-              secretKeyRef:
-                name: mysql-env-data
-                key: MYSQL_PASSWORD
+              configMapKeyRef:
+                name: {{ .Values.app.name }}-configmap
+                key: mysql_user
+          - name: MYSQL_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Values.app.name }}-configmap
+                key: mysql_host
+          - name: MYSQL_PASSWORD
+            value: "4697"
           - name: MYSQL_DB
-            value: "list"
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Values.app.name }}-configmap
+                key: mysql_db
+        volumeMounts:
+         - name: config
+           mountPath: "/config"
+           readOnly: true
+
+      volumes:
+        - name: config
+          configMap:
+            name: app-configmap
