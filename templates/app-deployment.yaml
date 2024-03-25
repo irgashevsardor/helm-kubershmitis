@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-deployment
+  name: {{ .Values.app.name }}-deployment
 spec:
   replicas: {{ .Values.app.replicaCount }}
   selector:
@@ -28,19 +28,13 @@ spec:
               configMapKeyRef:
                 name: {{ .Values.app.name }}-configmap
                 key: mysql_host
-          - name: MYSQL_PASSWORD
-            value: "1499"
           - name: MYSQL_DB
             valueFrom:
               configMapKeyRef:
                 name: {{ .Values.app.name }}-configmap
                 key: mysql_db
-        volumeMounts:
-         - name: config
-           mountPath: "/config"
-           readOnly: true
-
-      volumes:
-        - name: config
-          configMap:
-            name: app-configmap
+          - name: MYSQL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.app.name }}-secret
+                key: mysql_user_psswd

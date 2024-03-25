@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Release.Name }}-mysql-service
+  name: {{ .Values.db.name }}-service
 spec:
   type: ClusterIP
   selector:
