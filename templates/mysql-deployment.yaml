@@ -17,7 +17,9 @@ spec:
           claimName: {{ .Values.db.name }}-pvc
       containers:
       - name: {{ .Values.db.name }}
-        image: mysql:8.0
+        image: registry.digitalocean.com/kuberchart/mysql:latest
+        imagePullSecrets:
+          - name: do-registry
         ports:
         - containerPort: {{ .Values.db.containerPort }}
         volumeMounts:
