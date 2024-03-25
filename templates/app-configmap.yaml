@@ -4,5 +4,5 @@ metadata:
   name: {{ .Values.app.name }}-configmap
 data:
   mysql_user: "user"
-  mysql_host: "mysql-service"
+  mysql_host: {{ .Release.Name }}-mysql-service
   mysql_db: "list"

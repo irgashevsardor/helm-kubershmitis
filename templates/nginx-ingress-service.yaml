@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ .Release.Name }}-ingress-service
+  name: ingress-service
 spec:
   rules:
     - http:
@@ -10,6 +10,6 @@ spec:
           pathType: Prefix
           backend:
             service:
-              name: {{ .Values.app.name }}-service
+              name: {{ .Release.Name }}-service
               port:
-                number: {{ .Values.app.containerPort }}
+                number: 3000

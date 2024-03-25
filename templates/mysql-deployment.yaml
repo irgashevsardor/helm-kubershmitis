@@ -30,6 +30,6 @@ spec:
           - name: MYSQL_USER
             value: "user"
           - name: MYSQL_PASSWORD
-            value: "4697"
+            value: "1499"
           - name: MYSQL_DATABASE
             value: "list"

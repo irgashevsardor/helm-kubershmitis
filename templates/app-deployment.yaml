@@ -29,7 +29,7 @@ spec:
                 name: {{ .Values.app.name }}-configmap
                 key: mysql_host
           - name: MYSQL_PASSWORD
-            value: "4697"
+            value: "1499"
           - name: MYSQL_DB
             valueFrom:
               configMapKeyRef:

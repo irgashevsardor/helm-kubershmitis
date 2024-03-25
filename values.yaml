@@ -2,6 +2,7 @@ app:
   name: app
   replicaCount: 3
   containerPort: 3000
+
 db: 
   name: mysql
   mountPath: /var/lib/mysql
