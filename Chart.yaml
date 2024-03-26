@@ -1,0 +1,4 @@
+apiVersion: v1
+name: kuberchart
+version: 1.0.0
+description: Chart for kubershmitis project
