@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: {{ .Values.app.name }}-configmap
-data:
-  mysql_user: "user"
-  mysql_host: "mysql-service"
-  mysql_db: "list"
