@@ -18,8 +18,6 @@ spec:
       containers:
       - name: {{ .Values.db.name }}
         image: registry.digitalocean.com/kuberchart/mysql:latest
-        imagePullSecrets:
-          - name: do-registry
         ports:
         - containerPort: {{ .Values.db.containerPort }}
         volumeMounts:
@@ -47,3 +45,5 @@ spec:
               configMapKeyRef:
                 name: {{ .Values.app.name }}-configmap
                 key: mysql_db
+      imagePullSecrets:
+      - name: registry-kuberchart

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: {{ .Values.app.name }}
-        image: irgashevsardor/tasks-app
+        image: registry.digitalocean.com/kuberchart/tasks-app:latest
         ports:
         - containerPort: {{ .Values.app.containerPort }}
         env:
@@ -38,3 +38,5 @@ spec:
               secretKeyRef:
                 name: {{ .Values.app.name }}-secret
                 key: mysql_user_psswd
+      imagePullSecrets:
+      - name: registry-kuberchart
