@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.app.name }}-deployment
+spec:
+  replicas: {{ .Values.app.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.app.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.app.name }}
+    spec:
+      containers:
+      - name: {{ .Values.app.name }}
+        image: registry.digitalocean.com/kuberchart/tasks-app:latest
+        ports:
+        - containerPort: {{ .Values.app.containerPort }}
+        env:
+          - name: MYSQL_USER
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Values.app.name }}-configmap
+                key: mysql_user
+          - name: MYSQL_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Values.app.name }}-configmap
+                key: mysql_host
+          - name: MYSQL_DB
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Values.app.name }}-configmap
+                key: mysql_db
+          - name: MYSQL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.app.name }}-secret
+                key: mysql_user_psswd
+      imagePullSecrets:
+      - name: registry-kuberchart
